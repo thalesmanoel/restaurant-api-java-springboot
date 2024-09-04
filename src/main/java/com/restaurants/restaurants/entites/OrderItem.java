@@ -1,6 +1,5 @@
 package com.restaurants.restaurants.entites;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -9,51 +8,44 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_dish")
-public class Dish implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class OrderItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String description;
+	private Integer quantity;
 	private Double price;
 	
 	@ManyToOne
-	@JoinColumn(name = "restaurant_id")
-	private Restaurant restaurant;
+	@JoinColumn(name = "order_id")
+	private Order order;
 	
-	public Dish() {}
+	@ManyToOne
+	@JoinColumn(name = "dish_id")
+	private Dish dish;
+
+	public OrderItem() {}
 	
-	public Dish(Long id, String name, String description, Double price) {
+	public OrderItem(Long id, Integer quantity, Double price, Order order, Dish dish) {
 		this.id = id;
-		this.name = name;
-		this.description = description;
+		this.quantity = quantity;
 		this.price = price;
+		this.order = order;
+		this.dish = dish;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public Double getPrice() {
@@ -64,8 +56,20 @@ public class Dish implements Serializable {
 		this.price = price;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Dish getDish() {
+		return dish;
+	}
+
+	public void setDish(Dish dish) {
+		this.dish = dish;
 	}
 
 	@Override
@@ -81,7 +85,7 @@ public class Dish implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Dish other = (Dish) obj;
+		OrderItem other = (OrderItem) obj;
 		return Objects.equals(id, other.id);
 	}
 	

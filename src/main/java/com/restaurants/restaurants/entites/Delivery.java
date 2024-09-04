@@ -8,60 +8,59 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_dish")
-public class Dish implements Serializable {
+@Table(name = "tb_delivery")
+public class Delivery implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String description;
-	private Double price;
+	private String status;
+	private String deliveryAdress;
 	
-	@ManyToOne
-	@JoinColumn(name = "restaurant_id")
-	private Restaurant restaurant;
+	@OneToOne
+	@JoinColumn(name = "order_id")
+	private Order order;
 	
-	public Dish() {}
-	
-	public Dish(Long id, String name, String description, Double price) {
+	public Delivery() {}
+
+	public Delivery(Long id, String status, String deliveryAdress, Order order) {
 		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.price = price;
+		this.status = status;
+		this.deliveryAdress = deliveryAdress;
+		this.order = order;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDeliveryAdress() {
+		return deliveryAdress;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDeliveryAdress(String deliveryAdress) {
+		this.deliveryAdress = deliveryAdress;
 	}
 
-	public Double getPrice() {
-		return price;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	public static long getSerialversionuid() {
@@ -81,8 +80,11 @@ public class Dish implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Dish other = (Dish) obj;
+		Delivery other = (Delivery) obj;
 		return Objects.equals(id, other.id);
 	}
 	
+	
+	
 }
+

@@ -1,16 +1,19 @@
 package com.restaurants.restaurants.entites;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_restaurants")
+@Table(name = "tb_restaurant")
 public class Restaurant implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -21,16 +24,31 @@ public class Restaurant implements Serializable{
 	private String addres;
 	private String phone;
 	
+	@OneToMany(mappedBy = "restaurant")
+	private List<Dish> dishes = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "restaurant")
+	private List<Order> orders = new ArrayList<>();
+	
 	public Restaurant() {}
 	
-	public Restaurant(Long id, String addres, String phone) {
+	public Restaurant(Long id, String name, String addres, String phone) {
 		this.id = id;
+		this.name = name;
 		this.addres = addres;
 		this.phone = phone;
 	}
 	
 	public Long getId() {
 		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAddres() {
@@ -47,6 +65,22 @@ public class Restaurant implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public List<Dish> getDishes() {
+		return dishes;
+	}
+
+	public void setDishes(List<Dish> dishes) {
+		this.dishes = dishes;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
 	@Override
