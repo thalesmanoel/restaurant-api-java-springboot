@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restaurants.restaurants.enums.OrderStatus;
 
 import jakarta.persistence.Entity;
@@ -30,6 +31,7 @@ public class Order implements Serializable {
 	private OrderStatus status;
 	private Double total;
 	
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
@@ -46,13 +48,16 @@ public class Order implements Serializable {
 	
 	public Order() {}
 
-	public Order(Long id, LocalDateTime date, OrderStatus status, Double total, Restaurant restaurant, User user) {
+	public Order(Long id, LocalDateTime date, OrderStatus status, Double total, Restaurant restaurant, 
+			List<OrderItem> orderItem, Delivery delivery, User user) {
 		this.id = id;
 		this.date = date;
 		this.status = status;
 		this.total = total;
 		this.restaurant = restaurant;
 		this.user = user;
+		this.orderItem = orderItem;	
+		this.delivery = delivery;
 	}
 
 	public Long getId() {

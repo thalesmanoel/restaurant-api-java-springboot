@@ -19,7 +19,7 @@ public class Delivery implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String status;
+	private String estimate;
 	private String deliveryAdress;
 	
 	@OneToOne
@@ -28,9 +28,9 @@ public class Delivery implements Serializable {
 	
 	public Delivery() {}
 
-	public Delivery(Long id, String status, String deliveryAdress, Order order) {
+	public Delivery(Long id, String estimate, String deliveryAdress, Order order) {
 		this.id = id;
-		this.status = status;
+		this.estimate = estimate;
 		this.deliveryAdress = deliveryAdress;
 		this.order = order;
 	}
@@ -39,12 +39,12 @@ public class Delivery implements Serializable {
 		return id;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getEstimate() {
+		return estimate;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setEstimate(String estimate) {
+		this.estimate = estimate;
 	}
 
 	public String getDeliveryAdress() {
@@ -83,8 +83,6 @@ public class Delivery implements Serializable {
 		Delivery other = (Delivery) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 	
 }
 
