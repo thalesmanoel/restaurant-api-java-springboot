@@ -2,6 +2,8 @@ package com.restaurants.restaurants.entites;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +20,7 @@ public class OrderItem {
 	private Integer quantity;
 	private Double price;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
@@ -28,11 +31,10 @@ public class OrderItem {
 
 	public OrderItem() {}
 	
-	public OrderItem(Long id, Integer quantity, Double price, Order order, Dish dish) {
+	public OrderItem(Long id, Integer quantity, Double price, Dish dish) {
 		this.id = id;
 		this.quantity = quantity;
 		this.price = price;
-		this.order = order;
 		this.dish = dish;
 	}
 

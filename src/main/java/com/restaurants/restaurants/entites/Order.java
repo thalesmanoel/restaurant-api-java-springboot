@@ -49,15 +49,16 @@ public class Order implements Serializable {
 	public Order() {}
 
 	public Order(Long id, LocalDateTime date, OrderStatus status, Double total, Restaurant restaurant, 
-			List<OrderItem> orderItem, Delivery delivery, User user) {
+			List<OrderItem> orderItem, User user, Delivery delivery) {
 		this.id = id;
 		this.date = date;
 		this.status = status;
 		this.total = total;
 		this.restaurant = restaurant;
 		this.user = user;
-		this.orderItem = orderItem;	
-		this.delivery = delivery;
+		this.setOrderItem(orderItem);
+		this.setDelivery(delivery);
+		
 	}
 
 	public Long getId() {
