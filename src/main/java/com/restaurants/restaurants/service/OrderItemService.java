@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.restaurants.restaurants.entites.OrderItem;
+import com.restaurants.restaurants.entites.Restaurant;
 import com.restaurants.restaurants.repositories.OrderItemRepository;
 
 @Service
@@ -23,4 +24,8 @@ public class OrderItemService {
 		Optional<OrderItem> obj = orderItemRepository.findById(id);
 		return obj.get();
 	}
+	
+	public OrderItem createOrderItem(OrderItem orderItem) {
+        return orderItemRepository.save(orderItem );
+    }
 }
