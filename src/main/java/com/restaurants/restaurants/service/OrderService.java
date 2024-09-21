@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.restaurants.restaurants.entites.Order;
 import com.restaurants.restaurants.repositories.OrderRepository;
+import com.restaurants.restaurants.service.exceptions.ResourceNotFoundException;
 
 @Service
 public class OrderService {
@@ -25,6 +26,10 @@ public class OrderService {
 	
 	public Order findOrderByUserId(Long id) {
 		Optional<Order> obj = orderRepository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+	}
+	
+	public void deleteOrder(Long id) {
+		orderRepository.deleteById(id);
 	}
 }
