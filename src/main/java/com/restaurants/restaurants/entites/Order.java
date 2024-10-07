@@ -86,7 +86,12 @@ public class Order implements Serializable {
 	}
 
 	public Double getTotal() {
-		return total;
+		double sum = 0.0;
+		for(OrderItem x : orderItem) {
+			sum += x.getSubtotal();
+		}
+		
+		return sum;
 	}
 
 	public void setTotal(Double total) {
@@ -124,6 +129,8 @@ public class Order implements Serializable {
 	public void setDelivery(Delivery delivery) {
 		this.delivery = delivery;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {

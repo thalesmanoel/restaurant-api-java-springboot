@@ -35,8 +35,6 @@ public class OrderItemService {
 	
 	public OrderItem updateOrderItem(Long id, OrderItem orderItemUpdated) {
         Optional<OrderItem> orderItemOpt = orderItemRepository.findById(id);
-        
-        
         if (orderItemOpt.isPresent()) {
             OrderItem orderItem = orderItemOpt.get();
             

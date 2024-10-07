@@ -73,6 +73,10 @@ public class OrderItem {
 	public void setDish(Dish dish) {
 		this.dish = dish;
 	}
+	
+	public Double getSubtotal() {
+		return price * quantity;
+	}
 
 	@Override
 	public int hashCode() {

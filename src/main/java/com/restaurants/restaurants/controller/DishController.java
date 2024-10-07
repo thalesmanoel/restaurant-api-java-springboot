@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurants.restaurants.entites.Dish;
+import com.restaurants.restaurants.entites.User;
 import com.restaurants.restaurants.service.DishService;
 
 @RestController
@@ -30,8 +31,8 @@ public class DishController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Dish>> findDishById(@PathVariable Long id) {
-        Optional<Dish> dish = dishService.findDishById(id);
+    public ResponseEntity<Dish> findDishById(@PathVariable Long id) {
+        Dish dish = dishService.findDishById(id);
         return ResponseEntity.ok().body(dish);
     }
     

@@ -30,8 +30,8 @@ public class RestaurantController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Restaurant>> findRestaurantById(@PathVariable Long id) {
-        Optional<Restaurant> restaurant = restaurantService.findRestaurantsById(id);
+    public ResponseEntity<Restaurant> findRestaurantById(@PathVariable Long id) {
+        Restaurant restaurant = restaurantService.findRestaurantsById(id);
         return ResponseEntity.ok().body(restaurant);
     }
     

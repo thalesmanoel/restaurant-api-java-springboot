@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.restaurants.restaurants.entites.OrderItem;
 import com.restaurants.restaurants.entites.Restaurant;
 import com.restaurants.restaurants.repositories.RestaurantRepository;
+import com.restaurants.restaurants.service.exceptions.ResourceNotFoundException;
 
 @Service
 public class RestaurantService {
@@ -23,8 +25,9 @@ public class RestaurantService {
         return restaurantRepository.findAll();
     }
 
-    public Optional<Restaurant> findRestaurantsById(Long id) {
-        return restaurantRepository.findById(id);
+    public Restaurant findRestaurantsById(Long id) {
+    	Optional<Restaurant> obj = restaurantRepository.findById(id);
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public void deleteRestaurant(Long id) {
