@@ -29,7 +29,6 @@ public class Order implements Serializable {
 	private Long id;
 	private LocalDateTime date;
 	private OrderStatus status;
-	private Double total;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -48,16 +47,17 @@ public class Order implements Serializable {
 	
 	public Order() {}
 
-	public Order(Long id, LocalDateTime date, OrderStatus status, Double total, Restaurant restaurant, 
+	public Order(Long id, LocalDateTime date, OrderStatus status, Restaurant restaurant, 
 			List<OrderItem> orderItem, User user, Delivery delivery) {
 		this.id = id;
 		this.date = date;
 		this.status = status;
-		this.total = total;
 		this.restaurant = restaurant;
 		this.user = user;
+		this.orderItem = orderItem != null ? new ArrayList<>(orderItem) : new ArrayList<>();
 		this.setOrderItem(orderItem);
 		this.setDelivery(delivery);
+		
 		
 	}
 
@@ -86,16 +86,9 @@ public class Order implements Serializable {
 	}
 
 	public Double getTotal() {
-		double sum = 0.0;
-		for(OrderItem x : orderItem) {
-			sum += x.getSubtotal();
-		}
-		
-		return sum;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
+		return orderItem.stream()
+                .mapToDouble(OrderItem::getSubtotal)
+                .sum();
 	}
 
 	public Restaurant getRestaurant() {
@@ -119,8 +112,14 @@ public class Order implements Serializable {
 	}
 
 	public void setOrderItem(List<OrderItem> orderItem) {
-		this.orderItem = orderItem;
+	    if (orderItem != null) {
+	        this.orderItem.clear();
+	        this.orderItem.addAll(orderItem);
+	    } else {
+	        this.orderItem = new ArrayList<>();
+	    }
 	}
+
 
 	public Delivery getDelivery() {
 		return delivery;

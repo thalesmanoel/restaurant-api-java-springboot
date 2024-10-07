@@ -2,7 +2,7 @@ package com.restaurants.restaurants.enums;
 
 public enum Role {
 
-		COSTUMER,
-		EMPLOYEE,
-		ADMIN
+	COSTUMER,
+	EMPLOYEE,
+	ADMIN
 }

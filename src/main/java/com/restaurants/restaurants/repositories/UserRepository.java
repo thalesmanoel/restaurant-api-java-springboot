@@ -7,5 +7,4 @@ import com.restaurants.restaurants.entites.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-	User findByEmail(String email);
 }

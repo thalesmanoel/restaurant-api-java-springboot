@@ -62,9 +62,8 @@ public class TestConfig implements CommandLineRunner {
 		Dish d2 = new Dish(null, "Parmegiana", "carne", 35.0);
 		dishRepository.saveAll(Arrays.asList(d1, d2));
 		
-		Order o1 = new Order(null, date, status, 22.0, r1, null, u2, null);
-		Order o2 = new Order(null, date, status, 25.0, r1, null, u2, null);
-		orderRepository.saveAll(Arrays.asList(o1, o2));
+		Order o1 = new Order(null, date, status, r1, null, u2, null);
+		orderRepository.save(o1);
 		
 		Delivery delivery = new Delivery(null, "45min", "Rua XXXYYY", o1);
 		o1.setDelivery(delivery);
@@ -72,16 +71,15 @@ public class TestConfig implements CommandLineRunner {
 		
 		OrderItem oi1 = new OrderItem(null, 2, 5.0, d1);
 		OrderItem oi2 = new OrderItem(null, 4, 3.0, d2);
-		
+
 		oi1.setOrder(o1);
 		oi2.setOrder(o1);
 
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2));
 
-		o1.setOrderItem(Arrays.asList(oi1));
-		o2.setOrderItem(Arrays.asList(oi2));
+		o1.getOrderItem().addAll(Arrays.asList(oi1, oi2));
 
-		orderRepository.saveAll(Arrays.asList(o1, o2));
-		
+		orderRepository.save(o1);
+
 	}
 }

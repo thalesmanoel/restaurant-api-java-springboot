@@ -1,7 +1,6 @@
 package com.restaurants.restaurants.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurants.restaurants.entites.Dish;
-import com.restaurants.restaurants.entites.User;
 import com.restaurants.restaurants.service.DishService;
 
 @RestController

@@ -59,14 +59,6 @@ public class Restaurant implements Serializable{
 		return serialVersionUID;
 	}
 
-
-
-
-
-
-
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -83,7 +75,5 @@ public class Restaurant implements Serializable{
 		Restaurant other = (Restaurant) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 	
 }

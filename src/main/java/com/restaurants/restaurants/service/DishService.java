@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.restaurants.restaurants.entites.Dish;
-import com.restaurants.restaurants.entites.OrderItem;
 import com.restaurants.restaurants.repositories.DishRepository;
 import com.restaurants.restaurants.service.exceptions.ResourceNotFoundException;
 
