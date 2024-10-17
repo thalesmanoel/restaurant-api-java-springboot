@@ -86,9 +86,13 @@ public class Order implements Serializable {
 	}
 
 	public Double getTotal() {
-		return orderItem.stream()
-                .mapToDouble(OrderItem::getSubtotal)
-                .sum();
+		double total = 0.0;
+
+		for (int i = 0; i < orderItem.size(); i++) {
+		    total += orderItem.get(i).getSubtotal();
+		}
+
+		return total;
 	}
 
 	public Restaurant getRestaurant() {
